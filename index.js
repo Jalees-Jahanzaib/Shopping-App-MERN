@@ -2,12 +2,12 @@ const express = require('express')
 const app = express();
 const { User } = require('./models/user')
 const mongoose = require('mongoose')
-const db = 'mongodb+srv://Jahanzaib:zxcvbnm123@cluster0-bwh1r.mongodb.net/test?retryWrites=true&w=majority'
 const bodyParser = require('body-parser')
+const config = require('./config/key')
 const cookieParser = require('cookie-parser')
 const connectDB = async () => {
     try {
-        await mongoose.connect(db, {
+        await mongoose.connect(config.mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
