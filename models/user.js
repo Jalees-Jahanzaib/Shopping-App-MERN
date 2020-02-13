@@ -9,7 +9,27 @@ const userSchema = mongoose.Schema({
         type: String,
         trim: true,
         unique: 1
+    },
+    password: {
+        type: String,
+        minlength: 6
+    },
+    lastname: {
+        type: String,
+        maxlength: 50
+    },
+    role: {
+        type: Number,
+        default: 0
+    },
+    token: {
+        type: String
+    },
+    tokenExp: {
+        type: Number
     }
 
 
+
 })
+
