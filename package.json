@@ -9,6 +9,7 @@
   "author": "Jalees Jahanzaib",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.17.1",
     "mongoose": "^5.8.12"
   }
