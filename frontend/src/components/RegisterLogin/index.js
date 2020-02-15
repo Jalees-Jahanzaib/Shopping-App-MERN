@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import { loginUser } from './../../actions/user_actions'
 export class Login extends Component {
     state={
         email:"",
@@ -10,9 +11,43 @@ export class Login extends Component {
         this.setState({
             [event.target.name]:
             event.target.value
+        });
+
+    }
+    submitForm=(event)=>{
+        event.preventDefault();
+        let datatoSubmit={
+            email:this.state.email,
+            password:this.state.password
+        }
+
+        if (this.isFormValid(this.state)){
+            this.setState({errors:[]})
+            this.props.dispatch(loginUser(datatoSubmit)).then(response=>{
+    if(response.payload.loginSuccess){
+        this.props.history.push('./home')
+    }else{
+        this.setState({
+            errors:this.state.errors.concat('Failed to Login ! Please Check Email and Password!')
         })
     }
-    
+
+
+
+            })
+            
+
+        }
+        else{
+             this.setState({
+                 errors:this.state.errors.concat('Form is Not Valid!')
+             })   
+        }
+
+    }
+isFormValid=({email,password})=> email && password;
+displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
+   
     render() {
         return (
             <div className='container'>
@@ -52,6 +87,12 @@ export class Login extends Component {
                         /> 
          </div>
      </div>
+     {this.state.errors.length >0 && (  <div>
+         {this.displayErrors(this.state.errors)}
+         </div>)
+       
+         
+       }
      <div className='row'>
          <div className="col s12">
         <button className='btn waves-effect red lighten-2'
@@ -72,5 +113,11 @@ export class Login extends Component {
         )
     }
 }
-export default Login;
+function mapStatetoProps(state){
+    return{
+        user: state.user
+    }
+
+}
+export default connect(mapStatetoProps)(Login) ;
 

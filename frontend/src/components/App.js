@@ -1,7 +1,6 @@
 import React from 'react';
 import './../App.css';
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 
@@ -13,10 +12,10 @@ function App() {
   return (
     <div >
       <Switch>
-        <Route path="/Home" component={Home} />
+        <Route path="/home" component={Home} />
 
         <Route path="/about" component={About} />
-        <Route path="/Login" component={Login} />
+        <Route path="/login" component={Login} />
 
       </Switch>
 
