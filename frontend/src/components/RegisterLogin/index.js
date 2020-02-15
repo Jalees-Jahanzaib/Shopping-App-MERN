@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 
 export class Login extends Component {
+    state={
+        email:"",
+        password:"",
+        errors:[]
+    };
+    handleChange=(event)=>{
+        this.setState({
+            [event.target.name]:
+            event.target.value
+        })
+    }
+    
     render() {
         return (
             <div className='container'>
@@ -10,7 +22,7 @@ export class Login extends Component {
                         <div className="row">
                         <div className="input-field col s12">                             
                         <input name='email'
-                                 id="email" type="email" className="validate" />
+                                value={this.state.email} onChange={e => this.handleChange(e)} id="email" type="email" className="validate" />
                         <label htmlFor="email">
                             Email
                             
@@ -27,7 +39,7 @@ export class Login extends Component {
      <div className="row">
          <div className="input-field col s12">
          <input name='password'
-                                id="password" type="password" className="validate" />
+                                value={this.state.password} onChange={e => this.handleChange(e)} id="password" type="password" className="validate" />
                         <label htmlFor="email">
                             Password
                             
