@@ -3,18 +3,19 @@ import './../App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
+
 } from "react-router-dom";
 import About from './about'
 function App() {
   return (
     <div >
       <Switch>
-        <Router path='/about' component={About} />
+        <Route path="/about" component={About} />
       </Switch>
+      <div>
+        sfafa
+      </div>
     </div>
   );
 }

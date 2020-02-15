@@ -1,5 +1,8 @@
-export default function (states = {}, action) {
-    switch (action, type) {
+
+
+export default function (state = {}, action) {
+
+    switch (action.type) {
         default:
             return state;
     }
