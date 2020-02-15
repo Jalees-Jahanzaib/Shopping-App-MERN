@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { loginUser } from './../../actions/user_actions'
 export class Login extends Component {
     state={
@@ -94,7 +95,7 @@ displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
          
        }
      <div className='row'>
-         <div className="col s12">
+         <div className="col s6">
         <button className='btn waves-effect red lighten-2'
         type='submit'
         name="action"
@@ -102,6 +103,15 @@ displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
         >Login</button>
 
          </div>
+         <div className="col s6">
+             <Link to='/register'>
+        <button className='btn waves-effect red lighten-2'
+        type='submit'
+        name="action"
+        >Sign Up</button>
+</Link>
+         </div>
+         
          
      </div>
 

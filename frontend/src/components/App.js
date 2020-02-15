@@ -6,7 +6,8 @@ import {
 
 } from "react-router-dom";
 import About from './about';
-import Login from './RegisterLogin'
+import Login from './RegisterLogin/index'
+import Register from './RegisterLogin/Register'
 import Home from './home'
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
 
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+
 
       </Switch>
 
