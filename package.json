@@ -1,19 +1,19 @@
 {
-  "name": "react-boiler-plate",
+  "name": "Express",
   "version": "1.0.0",
-  "description": "react boiler plate",
+  "description": "React Express",
   "main": "index.js",
   "engine": {
     "node": "10.16.0",
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "backend": "nodemon server/index.js",
-    "frontend": "npm run start --prefix client",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "start": "node backend/index.js",
+    "server": "nodemon backend/index.js",
+    "client": "npm run start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run start --prefix frontend\""
   },
-  "author": "John ahn",
+  "author": "Jalees Jahanzaib",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -21,10 +21,12 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^0.20.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.20",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^5.1.2",
     "saslprep": "^1.0.3"
   },
   "devDependencies": {
