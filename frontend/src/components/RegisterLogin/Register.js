@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import  { registerUser } from './../../actions/user_actions'
 class Register extends Component {
     state={
         name:"",
@@ -7,13 +8,85 @@ class Register extends Component {
         email:"",
         password:"",
         confirmpassword:"",
-        errors:[]
-    }   ;
-    handleChange=(event)=>{
+        errors:[1,2,3,4]
+    }  ;
+displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
+
+isFormValid=()=>{
+    let errors=[];
+    let error;
+    if (this.isFormEmpty(this.state)){
+        error={message:'Fill in all the Blanks!'}
+        this.setState({errors:errors.concat(error)})
+
+    }
+    else if (!this.isPasswordvalid(this.state)){    
+            error={message:"Password is Invalid!"}
+            this.setState({errors:errors.concat(error)})
+    } 
+    else{
+        return true;
+    }
+    
+}
+isFormEmpty=({name,lastname,email,password,confirmpassword})=>{
+    return(!name.length||!lastname.length||!email.length||!password.length||!confirmpassword.length)
+        
+    
+}
+isPasswordvalid=({password,confirmpassword})=>{
+    if(password.length<6 || confirmpassword.length<6){
+        return false;
+    }
+    else if(password!==confirmpassword){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+ handleChange=(event)=>{
         this.setState({
             [event.target.name]:
             event.target.value
         });
+
+    }
+    submitForm=(event)=>{
+        event.preventDefault();
+        let datatoSubmit={
+            email: this.state.email,
+            name:this.state.name,
+            lastname:this.state.lastname,
+            password:this.state.password,
+            confirmpassword: this.state.confirmpassword
+        }
+        if(this.isFormValid()){
+            this.setState({errors:[]})
+            this.props.dispatch(registerUser(datatoSubmit)).then(
+                response=>{
+                    if(response.payload.success){
+                    this.props.history.push('/login')
+                    }
+                    else{
+                        this.setState({
+                            errors:this.state.errors.concat("DB connect attempt Failed!")
+                        })
+                    }
+                }
+
+            )
+            .catch(err=>{
+this.setState({
+    errors:this.state.errors.concat(err)
+})
+
+            })
+
+        }
+        else{
+            console.error("Form Is Not Valid!")
+        }
 
     }
     render() {
@@ -56,6 +129,21 @@ class Register extends Component {
  </div>
  <div className="row">
      <div className="input-field col s12">
+     <input name='email' value={this.state.email} onChange={e => this.handleChange(e)} id="email" type="email" className="validate" />
+                    <label className="active" htmlFor="email">
+                        Email
+                        
+                    </label>
+                    <span 
+                     className="helper-text"
+                     data-error="wrong"
+                     data-success="right"
+                    
+                    /> 
+     </div>
+ </div>
+ <div className="row">
+     <div className="input-field col s12">
      <input name='password'
                             value={this.state.password} onChange={e => this.handleChange(e)} id="password" type="password" className="validate" />
                     <label className="active" htmlFor="email">
@@ -86,27 +174,19 @@ class Register extends Component {
                     /> 
      </div>
  </div>
- <div className="row">
-     <div className="input-field col s12">
-     <input name='email' value={this.state.email} onChange={e => this.handleChange(e)} id="email" type="email" className="validate" />
-                    <label className="active" htmlFor="email">
-                        Email
-                        
-                    </label>
-                    <span 
-                     className="helper-text"
-                     data-error="wrong"
-                     data-success="right"
-                    
-                    /> 
-     </div>
- </div>
 
+ {this.state.errors.length >0 && (  <div>
+         {this.displayErrors(this.state.errors)}
+         </div>)
+       
+         
+       }
  <div className='row'>
      <div className="col s6">
     <button className='btn waves-effect red lighten-2'
     type='submit'
     name="action"
+    onClick={this.submitForm}
     >Create Account</button>
 
      </div>
@@ -122,4 +202,4 @@ class Register extends Component {
         )
     }
 }
-export default Register;
+export default connect()(Register);
