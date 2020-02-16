@@ -7,7 +7,7 @@ export class Login extends Component {
         email:"",
         password:"",
         errors:[]
-    };
+    }   ;
     handleChange=(event)=>{
         this.setState({
             [event.target.name]:
@@ -59,7 +59,7 @@ displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
                         <div className="input-field col s12">                             
                         <input name='email'
                                 value={this.state.email} onChange={e => this.handleChange(e)} id="email" type="email" className="validate" />
-                        <label htmlFor="email">
+                        <label className="active" htmlFor="email">
                             Email
                             
                         </label>
@@ -76,7 +76,7 @@ displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
          <div className="input-field col s12">
          <input name='password'
                                 value={this.state.password} onChange={e => this.handleChange(e)} id="password" type="password" className="validate" />
-                        <label htmlFor="email">
+                        <label className="active" htmlFor="email">
                             Password
                             
                         </label>
@@ -108,7 +108,7 @@ displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
         <button className='btn waves-effect red lighten-2'
         type='submit'
         name="action"
-        >Sign Up</button>
+        > <i class="material-icons right"></i> Sign up</button>
 </Link>
          </div>
          
