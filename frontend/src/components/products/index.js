@@ -4,13 +4,15 @@ import { Container, ListGroup, ListGroupItem, Button, ListGroupItemText, ListGro
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
 import { connect } from 'react-redux'
-import { get_items } from '../../actions/item_actions'
+import { get_items, delete_item } from '../../actions/item_actions'
 import PropTypes from 'prop-types'
 class Products extends Component {
     componentDidMount() {
         this.props.get_items();
     }
-
+    onDelete = (id) => {
+        this.props.delete_item(id)
+    }
     render() {
         const { items } = this.props.item
         return (
@@ -46,11 +48,8 @@ class Products extends Component {
                                         <ListGroupItemText>Quantity ={quantity}</ListGroupItemText>
                                         <ListGroupItemText>Minimun-Quantity= {minimum}</ListGroupItemText>
                                         <ListGroupItemText>Price= {price}</ListGroupItemText>
-                                        <Button color="danger" size="lg" onClick={() => {
-                                            this.setState(state => ({
-                                                items: state.items.filter(item => item.id !== id)
-                                            }))
-                                        }}>Delete</Button>
+                                        <Button color="danger" size="lg" onClick=
+                                            {this.onDelete.bind(this, id)}>Delete</Button>
                                     </ListGroupItem>
 
 
@@ -87,4 +86,4 @@ Products.propTypes = {
 const mapStateToProps = (state) => ({
     item: state.items
 })
-export default connect(mapStateToProps, { get_items })(Products);
+export default connect(mapStateToProps, { get_items, delete_item })(Products);

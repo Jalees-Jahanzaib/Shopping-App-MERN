@@ -8,7 +8,7 @@ class Register extends Component {
         email:"",
         password:"",
         confirmpassword:"",
-        errors:[1,2,3,4]
+        errors:[]
     }  ;
 displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
 
