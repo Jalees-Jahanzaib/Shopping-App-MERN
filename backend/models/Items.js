@@ -10,12 +10,20 @@ const ItemSchema = new Schema({
     quantity: {
         type: Number,
     },
+    minimum: {
+        type: Number
+    },
     seller: {
         type: String,
 
     },
     status: {
         type: String,
+        default: "Not Dispached"
+
+    },
+    price: {
+        type: Number
     }
     ,
     date: {
