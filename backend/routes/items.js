@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const newItem = new Item({
-        name: req.body.name, seller: req.body.seller, quantity: req.body.quantity
+        name: req.body.name, seller: req.body.seller, quantity: req.body.quantity, price: req.body.price, minimum: req.body.minimum
     });
 
     newItem.save().then(item => res.json(item));
