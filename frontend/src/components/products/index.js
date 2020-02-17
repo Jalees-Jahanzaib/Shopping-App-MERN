@@ -3,28 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, ListGroup, ListGroupItem, Button, ListGroupItemText, ListGroupItemHeading } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
+import { connect } from 'react-redux'
+import { get_items } from '../../actions/item_actions'
+import PropTypes from 'prop-types'
 class Products extends Component {
-    state = {
-        items: [{
-            id: uuid(),
-            name: "Sucide ",
-            seller: "Sellers of Death",
-            quantity: 105,
-            minimum: 50,
-
-
-        },
-        {
-            id: uuid(),
-            name: "Death ",
-            seller: "Killer",
-            quantity: 300,
-            minimum: 50,
-
-        }]
+    componentDidMount() {
+        this.props.get_items();
     }
+
     render() {
-        const { items } = this.state
+        const { items } = this.props.item
         return (
             <div>
                 <Container>
@@ -51,11 +39,20 @@ class Products extends Component {
                     <ListGroup >
 
                         <TransitionGroup className="products">
-                            {items.map(({ id, name, quantity, minimum }) => (
+                            {items.map(({ id, name, price, quantity, minimum }) => (
                                 <CSSTransition key={id} timeout={500} >
-                                    <ListGroupItem dark>                                 <ListGroupItemHeading>{name}</ListGroupItemHeading>
+                                    <ListGroupItem dark>
+                                        <ListGroupItemHeading>{name}</ListGroupItemHeading>
                                         <ListGroupItemText>Quantity ={quantity}</ListGroupItemText>
-                                        <ListGroupItemText>Minimun-Quantity= {minimum}</ListGroupItemText></ListGroupItem>
+                                        <ListGroupItemText>Minimun-Quantity= {minimum}</ListGroupItemText>
+                                        <ListGroupItemText>Price= {price}</ListGroupItemText>
+                                        <Button color="danger" size="lg" onClick={() => {
+                                            this.setState(state => ({
+                                                items: state.items.filter(item => item.id !== id)
+                                            }))
+                                        }}>Delete</Button>
+                                    </ListGroupItem>
+
 
 
 
@@ -83,4 +80,11 @@ class Products extends Component {
         )
     }
 }
-export default Products;
+Products.propTypes = {
+    get_items: PropTypes.func,
+    item: PropTypes.object
+}
+const mapStateToProps = (state) => ({
+    item: state.items
+})
+export default connect(mapStateToProps, { get_items })(Products);
