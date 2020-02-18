@@ -11,7 +11,9 @@ import Register from './RegisterLogin/Register'
 import VendorR from './RegisterVendors/Register'
 import LoginV from './RegisterVendors/index'
 import Home from './home'
-import Example from './main/index'
+import Vhome from './Vhome'
+import VProducts from './Vhome/readytodispach'
+import Dispatched from './Vhome/dispached'
 function App() {
   return (
     <div >
@@ -23,7 +25,11 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/vendor-login" component={LoginV} />
         <Route path="/vendor-register" component={VendorR} />
-        <Route path="/main" component={Example} />
+        <Route path="/vendor-home" component={Vhome} />
+        <Route path="/vendor-ready-to-dispatch" component={VProducts} />
+        <Route path="/vendor-dispatched" component={Dispatched} />
+
+
 
 
       </Switch>

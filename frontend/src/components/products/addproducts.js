@@ -10,13 +10,13 @@ import {
 }
     from 'reactstrap';
 import { connect } from 'react-redux'
-import { add_item } from './../../actions/item_actions'
+import { add_item, seller } from './../../actions/item_actions'
 class Addproducts extends Component {
     state = {
         modal: false,
         name: "",
         quantity: "",
-        minimum: "",
+        seller: "",
         price: ""
 
 
@@ -37,7 +37,8 @@ class Addproducts extends Component {
             name: this.state.name,
             quantity: this.state.quantity,
             price: this.state.price,
-            minimum: this.state.minimum
+            minimum: this.state.minimum,
+            seller: this.props.seller
 
 
         }
@@ -66,7 +67,6 @@ class Addproducts extends Component {
                                 <Input type='text' name='name' id="product" placeholder="Add Product Here!" onChange={this.onChange} />
                                 <Input type='number' name='quantity' id="quantity" placeholder="Add Quantity Here!" onChange={this.onChange} />
                                 <Input type='number' name='price' id="price" placeholder="Add Price Here!" onChange={this.onChange} />
-                                <Input type='number' name='minimum' id="minimum" placeholder="Add Minimum Dispach Limit Here!" onChange={this.onChange} />
                                 <Button size="lg"> Add!</Button>
                             </FormGroup>
                         </Form>

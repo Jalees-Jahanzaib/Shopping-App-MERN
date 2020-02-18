@@ -50,7 +50,9 @@ isFormValid=({email,password})=> email && password;
 displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
    
     render() {
+       
         return (
+
             <div className='container'>
                 <h2>Login Page</h2>
                 <div className='row'>
@@ -125,7 +127,7 @@ displayErrors=errors=>errors.map((error,i)=><p key={i} > {error} </p>)
 }
 function mapStatetoProps(state){
     return{
-        user: state.user
+        user: state.user,
     }
 
 }
