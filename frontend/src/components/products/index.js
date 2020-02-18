@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { get_items, delete_item } from '../../actions/item_actions'
 import PropTypes from 'prop-types'
 import './product.css'
+
 class Products extends Component {
     componentDidMount() {
         this.props.get_items();
@@ -18,6 +19,9 @@ class Products extends Component {
 
     render() {
         const { items } = this.props.item
+        var rebels = items.filter(function (pilot) {
+            return pilot.status === "Not Dispached";
+        });
         return (
             <div>
                 <Container>
@@ -27,16 +31,16 @@ class Products extends Component {
                     <ListGroup >
 
                         <TransitionGroup className="products">
-                            {items.map(({ id, name, price, quantity, seller }) => (
-                                <CSSTransition key={id} timeout={500} >
+                            {rebels.map(({ _id, name, price, quantity, status }) => (
+                                <CSSTransition key={_id} timeout={500} >
                                     <ListGroupItem light>
                                         <ListGroupItemHeading>{name}</ListGroupItemHeading>
                                         <ListGroupItemText>Quantity ={quantity}</ListGroupItemText>
                                         <ListGroupItemText>Price={price}</ListGroupItemText>
-                                        <ListGroupItemText>Seller={seller}</ListGroupItemText>
+                                        <ListGroupItemText>Status={status}</ListGroupItemText>
 
-                                        <Button className="red" onClick=
-                                            {this.onDelete.bind(this, id)}>Delete</Button>
+                                        <i class=" material-icons ">add_circle</i>          <Button className="red" onClick=
+                                            {this.onDelete.bind(this, _id)}>Delete</Button>
                                     </ListGroupItem>
 
 
