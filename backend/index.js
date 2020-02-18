@@ -23,12 +23,11 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
+app.use('/api/vendor', require('./routes/vendors'));
+
 app.use('/api/items', require('./routes/items'));
 
 if (process.env.NODE_ENV === "production") {

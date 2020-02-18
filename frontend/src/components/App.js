@@ -8,6 +8,8 @@ import {
 import About from './about';
 import Login from './RegisterLogin/index'
 import Register from './RegisterLogin/Register'
+import VendorR from './RegisterVendors/Register'
+import LoginV from './RegisterVendors/index'
 import Home from './home'
 import Example from './main/index'
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/vendor-login" component={LoginV} />
+        <Route path="/vendor-register" component={VendorR} />
         <Route path="/main" component={Example} />
 
 
